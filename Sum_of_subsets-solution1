@@ -1,0 +1,32 @@
+#include <stdio.h>
+
+int main()
+{
+    int arr[10000];
+    int n,value;
+    scanf("%d",&n);
+    for(int i = 0; i<n; i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+    scanf("%d",&value);
+    int sum = arr[0], first = 0, i;
+    for (i = 1; i <= n; i++)
+    {
+        while(sum > value && first < i-1)
+        {
+            sum = sum - arr[first];
+            first++;
+        }
+        if(sum == value)
+        {
+            printf("Subset:");
+            for(int itr=first; itr<=i-1; itr++)
+                printf("%d ",arr[itr]);
+                
+        }
+        if(i < n)
+          sum = sum + arr[i];
+    }
+    return 0;
+}
