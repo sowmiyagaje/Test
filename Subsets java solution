@@ -1,0 +1,35 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.io.*;
+public class Subset
+{
+    private static int[] arr= { 1, 2, 3, 4, 5 };
+    private static int[] sum_arr= new int[arr.length];
+    private static int value= 13;
+    private static void find_subsets(int[] arr, int i, int value, List<Integer> sets)
+    {
+        if (value == 0) 
+            System.out.println(sets);
+        else
+            for (; i < arr.length && sum_arr[i] >= value; i++)
+            {
+                if (arr[i] <= value)
+                {
+                    sets.add(0, arr[i]);
+                    find_subsets(arr, i+1, value-arr[i], sets);
+                    sets.remove(0);
+                }
+            }
+    }
+ 
+    public static void main(String[] args)
+    {
+        for (int s= 0, i= arr.length; --i >= 0; )
+        {
+            sum_arr[i]= arr[i]+s;
+            s+= arr[i];
+        }
+        find_subsets(arr, 0, value, new ArrayList<Integer>());
+    }
+}
